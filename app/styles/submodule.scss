@@ -1,0 +1,11 @@
+.submodule {
+    section {
+        img:not(:first-child) {
+            margin-top: 14px;
+        }        
+
+        & > button {
+            right: 0;
+        }
+    }
+}

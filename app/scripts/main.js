@@ -73,4 +73,29 @@
   }
 
   // Your custom JavaScript goes here
+  const $ = window.$;
+  const submoduleEl = document.querySelector('.submodule #overview');
+
+  if (submoduleEl) {
+    const submoduleConstructor = function (rootEl) {
+      this.root = rootEl;
+      this.$root = $(this.root);
+      this.button = this.$root.find('button');
+      this.bacon = this.$root.find('img[alt="Bacon"]');
+    };  
+    submoduleConstructor.prototype.loadMoreBacon = function () {
+      this.bacon.clone().appendTo(this.bacon.parent());
+    };
+    submoduleConstructor.prototype.bindLoadBacon = function () {
+      this.button.on('click', () => {
+        this.loadMoreBacon();
+      })
+    };
+    submoduleConstructor.prototype.bindActions = function () {
+      this.bindLoadBacon();
+    };
+
+    const submoduleApp = new submoduleConstructor(submoduleEl);
+    submoduleApp.bindActions();
+  }
 })();
