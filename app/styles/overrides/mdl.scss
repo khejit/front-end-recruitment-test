@@ -1,0 +1,42 @@
+.mdl-cell--12-col {
+    @media (min-width: 480px) and (max-width: 839px){
+        width: calc(75% - 16px);
+    }
+}
+
+.mdl-cell {
+    z-index: 1;
+}
+
+.mdl-cell--withselect {
+    z-index: 2;
+}
+
+.mdl-selectfield {
+    padding: 0;
+    width: 100%;
+
+    .mdl-menu__container {
+        top: 0 !important;
+    }
+}
+
+.mdl-selectfield__placeholder {
+    top: 0;
+    height: 100%;
+
+    &:after {
+        content: 'chevron_right';
+        font-family: "Material Icons";
+        position: absolute;
+        font-weight: bold;
+        font-size: 24px;
+        right: 0;
+        top: 0;
+        transform: translateY(-50%) rotate(90deg);
+    }
+
+    i {
+        display: none;
+    }
+}

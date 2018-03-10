@@ -1,0 +1,47 @@
+.step {
+    counter-increment: steps;
+    padding-bottom: 20px;
+
+    &__heading {
+        @include lato-bold;
+        font-size: 13px;
+        line-height: 1;
+        position: relative;
+        left: 30px;
+        text-transform: uppercase;
+        color: black;
+        padding-left: 18px;
+        margin: 4px 0;
+
+        i {
+            font-size: 16px;
+            color: $dark-icon;
+            margin-top: -5px;
+            position: relative;
+            top: 2px;
+            margin-left: 10px;
+        }
+
+        &:before {
+            font-family: $font-roboto;
+            content: counter(steps);
+            display: block;
+            position: absolute;
+            left: -14px;
+            top: -5px;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 22px;
+            background-color: black;
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        &__heading {
+            left: 0;
+        }
+    }
+}

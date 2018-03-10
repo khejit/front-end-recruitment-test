@@ -1,0 +1,23 @@
+// typographic mixins
+
+@mixin lato-bold {
+    font-family: $font-lato;
+    font-weight: 900;
+}
+
+
+// utilities
+
+@mixin reset-input() {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    background: none;
+    appearance: none;
+    &:focus {
+      outline: 0;
+    }
+  }
