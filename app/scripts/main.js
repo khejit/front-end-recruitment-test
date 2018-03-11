@@ -72,7 +72,7 @@
     });
   }
 
-  // Your custom JavaScript goes here
+  // More bacon with jQuery
   const $ = window.$;
   const submoduleEl = document.querySelector('.submodule #overview');
 
@@ -97,5 +97,29 @@
 
     const submoduleApp = new submoduleConstructor(submoduleEl);
     submoduleApp.bindActions();
-  }
+  };
+
+  // Checkout form validation with Vue
+  Vue.use(VeeValidate);
+
+  new Vue({
+    el: '#checkout',
+    data: function () {
+      return {
+        submitAttempted: false,
+      }
+    },
+    methods: {
+      submitForm: function () {
+        this.submitAttempted = true;
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            alert("Form submitted!");
+          } else {
+            alert("Errors occured!");
+          }
+        })
+      }
+    }
+  })
 })();
