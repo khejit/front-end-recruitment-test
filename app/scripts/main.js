@@ -72,54 +72,37 @@
     });
   }
 
-  // More bacon with jQuery
-  const $ = window.$;
-  const submoduleEl = document.querySelector('.submodule #overview');
+  // More bacon with vanilla js
 
-  if (submoduleEl) {
-    const submoduleConstructor = function (rootEl) {
+  /**
+   * Checks if current page is submodule page
+   * without touching of submodules html file.
+   * @return {bool} Indicator if current page is submodule. Duh.
+   */
+  function isSubmodulePage() {
+    const headerEl = document.querySelector('.mdl-layout__header-row h3');
+    return (headerEl.innerHTML === 'Submodule');
+  }
+
+  if (isSubmodulePage()) {
+    const SubmoduleConstructor = function(rootEl) {
       this.root = rootEl;
-      this.$root = $(this.root);
-      this.button = this.$root.find('button');
-      this.bacon = this.$root.find('img[alt="Bacon"]');
-    };  
-    submoduleConstructor.prototype.loadMoreBacon = function () {
-      this.bacon.clone().appendTo(this.bacon.parent());
+      this.button = this.root.querySelector('button');
+      this.bacon = this.root.querySelector('img[alt="Bacon"]');
     };
-    submoduleConstructor.prototype.bindLoadBacon = function () {
-      this.button.on('click', () => {
+    SubmoduleConstructor.prototype.loadMoreBacon = function() {
+      this.bacon.parentNode.appendChild(this.bacon.cloneNode(true));
+    };
+    SubmoduleConstructor.prototype.bindLoadBacon = function() {
+      this.button.addEventListener('click', () => {
         this.loadMoreBacon();
-      })
+      });
     };
-    submoduleConstructor.prototype.bindActions = function () {
+    SubmoduleConstructor.prototype.bindActions = function() {
       this.bindLoadBacon();
     };
 
-    const submoduleApp = new submoduleConstructor(submoduleEl);
+    const submoduleApp = new SubmoduleConstructor(document.querySelector('#overview'));
     submoduleApp.bindActions();
-  };
-
-  // Checkout form validation with Vue
-  Vue.use(VeeValidate);
-
-  new Vue({
-    el: '#checkout',
-    data: function () {
-      return {
-        submitAttempted: false,
-      }
-    },
-    methods: {
-      submitForm: function () {
-        this.submitAttempted = true;
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            alert("Form submitted!");
-          } else {
-            alert("Errors occured!");
-          }
-        })
-      }
-    }
-  })
+  }
 })();
