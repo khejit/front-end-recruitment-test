@@ -283,33 +283,33 @@
       </div>
       <div class="mdl-layout__tab-panel is-active checkout" id="checkout">
         <section class="section--center mdl-grid mdl-grid--no-spacing">
-          <form action="" method="POST" @submit.prevent="submitForm" class="checkout__form mdl-cell mdl-cell--8-col">
+          <form action="" method="POST" class="checkout__form mdl-cell mdl-cell--8-col">
             <div class="checkout__step step">
               <h2 class="step__heading">Personal information</h2>
               <div class="step__body mdl-grid">
                 <div class="mdl-cell mdl-cell--6-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('first-name')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="first-name" class="checkout__form-label">First name</label>
-                    <input type="text" id="first-name" name="first-name" v-validate="'required|alpha_spaces'">
+                    <input type="text" id="first-name" name="first-name" data-v-rules="required alphanum">
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--6-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('last-name')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="last-name" class="checkout__form-label">Last name</label>
-                    <input type="text" name="last-name" id="last-name" v-validate="'required|alpha_spaces'">
+                    <input type="text" name="last-name" id="last-name" data-v-rules="required alphanum">
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('email')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="email" class="checkout__form-label">Email</label>
-                    <input type="email" name="email" id="email" v-validate="'required|email'">
+                    <input type="email" name="email" id="email"  data-v-rules="required email">
                   </fieldset>
                 </div>
-                <div class="mdl-cell mdl-cell--6-col mdl-cell--withselect dupa">
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--withselect">
                   <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="country" class="checkout__form-label">Country</label>
                     <div class="mdl-selectfield mdl-js-selectfield">
-                      <select id="country" name="country" v-validate="'required'" class="mdl-selectfield__select">
+                      <select id="country" name="country" class="mdl-selectfield__select">
                         <option value="option1">United States</option>
                         <option value="option2">Poland</option>
                         <option value="option3">Canada</option>
@@ -320,15 +320,15 @@
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--6-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('postcode')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="postcode" class="checkout__form-label">Postal Code</label>
-                    <input type="text" name="postcode" id="postcode" v-validate="'required|alpha_dash'">
+                    <input type="text" name="postcode" id="postcode"  data-v-rules="required postal">
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('phone')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="phone" class="checkout__form-label">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" placeholder="e.g. (XXX) XXX XX XX" v-validate="{regex:/^([a-zA-Z,#/ \\.\\(\\)\\-\\+\\*]*[0-9]){7}[0-9a-zA-Z,#/ \\.\\(\\)\\-\\+\\*]*$/}">
+                    <input type="tel" name="phone" id="phone" placeholder="e.g. (XXX) XXX XX XX" data-v-rules="phone">
                   </fieldset>
                 </div>
               </div>
@@ -339,24 +339,24 @@
               </h2>
               <div class="step__body checkout__credit-card mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('cc-number')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="cc-number" class="checkout__form-label">Credit Card Number</label>
-                    <input id="cc-number" name="cc-number" class="cc-number" v-validate="'required|credit_card'">
+                    <input id="cc-number" name="cc-number" class="cc-number" data-v-rules="required cc">
                     <i class="checkout__cc-image"></i>
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--6-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('cc-cvc')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="cc-cvc" class="checkout__form-label">Security code</label>
-                    <input type="password" id="cc-cvc" class="cc-cvc" name="cc-cvc" v-validate="'required|decimal|min:3|max:4'">
+                    <input type="password" id="cc-cvc" class="cc-cvc" name="cc-cvc" data-v-rules="required cvc">
                     <i class="checkout__cvc-question" id="cvc-question">?</i>
                     <div class="mdl-tooltip mdl-tooltip--left" data-mdl-for="cvc-question">3 or 4 digit code usually found on the backside of the credit card</div>
                   </fieldset>
                 </div>
                 <div class="mdl-cell mdl-cell--6-col">
-                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp" :class="{'error':errors.has('cc-expiry')&&submitAttempted}">
+                  <fieldset class="checkout__form-field mdl-card mdl-shadow--2dp">
                     <label for="cc-expiry" class="checkout__form-label">Expiration date</label>
-                    <input id="cc-expiry" class="cc-expiry" name="cc-expiry" placeholder="MM/YY" v-validate="'required|date_format:MM/YY'">
+                    <input id="cc-expiry" class="cc-expiry" name="cc-expiry" placeholder="MM/YY" data-v-rules="required expDate">
                   </fieldset>
                 </div>
               </div>
@@ -494,10 +494,7 @@
     </main>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
   <script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script>
   <!-- build:js scripts/main.min.js -->
